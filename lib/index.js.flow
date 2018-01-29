@@ -565,7 +565,6 @@ export default class Resizable extends React.Component<ResizableProps, State> {
           ...userSelect,
           ...this.props.style,
           ...this.sizeStyle,
-          display: 'block',
           maxWidth: this.props.maxWidth,
           maxHeight: this.props.maxHeight,
           minWidth: this.props.minWidth,
@@ -580,7 +579,6 @@ export default class Resizable extends React.Component<ResizableProps, State> {
           style={{
             height: '100%',
             width: '100%',
-            display: 'block',
             backgroundColor: 'rgba(0,0,0,0)',
             cursor: `${this.state.resizeCursor || 'auto'}`,
             opacity: '0',
