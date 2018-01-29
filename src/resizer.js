@@ -85,9 +85,9 @@ export type Props = {
   children: ?React.ChildrenArray<*>
 }
 
-export default (props: Props): React.Element<'div'> => {
+export default (props: Props): React.Element<'span'> => {
   return (
-    <div
+    <span
       className={props.className}
       style={{
         ...styles.base,
@@ -102,6 +102,6 @@ export default (props: Props): React.Element<'div'> => {
       }}
     >
       {props.children}
-    </div>
+    </span>
   );
 };

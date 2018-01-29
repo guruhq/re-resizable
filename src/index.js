@@ -82,14 +82,14 @@ export type HandleComponent = {
 export type ResizeCallback = (
   event: MouseEvent | TouchEvent,
   direction: Direction,
-  elementRef: React.ElementRef<'div'>,
+  elementRef: React.ElementRef<'span'>,
   delta: NumberSize,
 ) => void;
 
 export type ResizeStartCallback = (
-  e: SyntheticMouseEvent<HTMLDivElement> | SyntheticTouchEvent<HTMLDivElement>,
+  e: SyntheticMouseEvent<HTMLSpanElement> | SyntheticTouchEvent<HTMLSpanElement>,
   dir: Direction,
-  elementRef: React.ElementRef<'div'>,
+  elementRef: React.ElementRef<'span'>,
 ) => void;
 
 export type ResizableProps = {
@@ -155,7 +155,7 @@ const definedProps = [
 ];
 
 export default class Resizable extends React.Component<ResizableProps, State> {
-  resizable: React.ElementRef<'div'>;
+  resizable: React.ElementRef<'span'>;
   onTouchMove: ResizeCallback;
   onMouseMove: ResizeCallback;
   onMouseUp: ResizeCallback;
@@ -239,8 +239,8 @@ export default class Resizable extends React.Component<ResizableProps, State> {
     const base = (document.getElementById(this.baseSizeId): any);
     if (!base) return { width: window.innerWidth, height: window.innerHeight };
     return {
-      width: (base: HTMLDivElement).offsetWidth,
-      height: (base: HTMLDivElement).offsetHeight,
+      width: (base: HTMLSpanElement).offsetWidth,
+      height: (base: HTMLSpanElement).offsetHeight,
     };
   }
 
@@ -250,7 +250,7 @@ export default class Resizable extends React.Component<ResizableProps, State> {
       width: this.state.width || size.width,
       height: this.state.height || size.height,
     });
-    const element = document.createElement('div');
+    const element = document.createElement('span');
     element.id = this.baseSizeId;
     element.style.width = '100%';
     element.style.height = '100%';
@@ -290,7 +290,7 @@ export default class Resizable extends React.Component<ResizableProps, State> {
   }
 
   onResizeStart(
-    event: SyntheticMouseEvent<HTMLDivElement> | SyntheticTouchEvent<HTMLDivElement>,
+    event: SyntheticMouseEvent<HTMLSpanElement> | SyntheticTouchEvent<HTMLSpanElement>,
     direction: Direction,
   ) {
     let clientX = 0;
@@ -309,7 +309,7 @@ export default class Resizable extends React.Component<ResizableProps, State> {
       clientY = event.nativeEvent.touches[0].clientY;
     }
     if (this.props.onResizeStart) {
-      this.props.onResizeStart(event, direction, (this.resizable: React.ElementRef<'div'>));
+      this.props.onResizeStart(event, direction, (this.resizable: React.ElementRef<'span'>));
     }
 
     // Fix #168
