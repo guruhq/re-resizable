@@ -277,7 +277,12 @@ export default class Resizable extends React.Component<ResizableProps, State> {
       const parent = this.parentNode;
       const base = document.getElementById(this.baseSizeId);
       if (!base) return;
-      if (!(parent instanceof HTMLElement) || !(base instanceof Node)) return;
+      if (
+        !(parent instanceof HTMLElement) ||
+        !(base instanceof Node) ||
+        !parent.contains(base)
+      ) { return; }
+
       parent.removeChild(base);
     }
   }
