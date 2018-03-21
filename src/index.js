@@ -220,7 +220,7 @@ export default class Resizable extends React.Component<ResizableProps, State> {
   }
 
   get parentNode(): HTMLElement {
-    return ((this.resizable: any).parentNode: any);
+    return this.resizable && ((this.resizable: any).parentNode: any);
   }
 
   get propsSize(): ?Size {
@@ -564,7 +564,11 @@ export default class Resizable extends React.Component<ResizableProps, State> {
     const userSelect = this.state.isResizing ? userSelectNone : userSelectAuto;
     return (
       <span
-        ref={(c: React.ElementRef<'span'> | null) => { this.resizable = c; }}
+        ref={(c: React.ElementRef<'span'> | null) => {
+          if (c) {
+            this.resizable = c;
+          }
+        }}
         style={{
           position: 'relative',
           ...userSelect,
