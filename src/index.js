@@ -208,6 +208,7 @@ export default class Resizable extends React.Component<ResizableProps, State> {
     this.onResizeStart = this.onResizeStart.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.setResizable = this.setResizable.bind(this);
     this.baseSizeId = `__resizable${baseSizeId}`;
     baseSizeId += 1;
 
@@ -560,15 +561,17 @@ export default class Resizable extends React.Component<ResizableProps, State> {
       </span>);
   }
 
+  setResizable(c: React.ElementRef<'span'> | null) {
+    if (c) {
+      this.resizable = c;
+    }
+  }
+
   render(): React.Node {
     const userSelect = this.state.isResizing ? userSelectNone : userSelectAuto;
     return (
       <span
-        ref={(c: React.ElementRef<'span'> | null) => {
-          if (c) {
-            this.resizable = c;
-          }
-        }}
+        ref={this.setResizable}
         style={{
           position: 'relative',
           ...userSelect,
